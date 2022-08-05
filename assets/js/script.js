@@ -12,7 +12,6 @@ $( document ).ready(function() {
         $('.house-model-container').css('--height', height + 'px');
         // console.log(baseHeight, Math.ceil(Math.min(...baseHeight)))
     }
-    updateBaseHeight();
     
     const updateBaseWidth = function() {
         var baseWidth = [];
@@ -23,7 +22,11 @@ $( document ).ready(function() {
         $('.house-model-container').css('--x-width', Math.floor(Math.min(...baseWidth)) + 'px');
         $('.house-model-container').css('--z-width', Math.ceil(Math.max(...baseWidth)) + 'px');
     }
-    updateBaseWidth();
+    
+    setInterval(() => { 
+        updateBaseHeight();
+        updateBaseWidth();
+    }, 5000);
 
 
     const updateNav = function () {
