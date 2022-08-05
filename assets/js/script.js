@@ -26,7 +26,7 @@ $( document ).ready(function() {
     setInterval(() => { 
         updateBaseHeight();
         updateBaseWidth();
-    }, 5000);
+    }, 1000);
 
 
     const updateNav = function () {
