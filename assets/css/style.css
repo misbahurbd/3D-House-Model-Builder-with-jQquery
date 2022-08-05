@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Lora:wght@600;700&display=swap');
+
+body {
+    --heading-font: 'Lora', serif;
+    --content-font: 'Josefin Sans', sans-serif;
+    --wrapper-size: 1320px;
+    --soft-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    --brand-color: #e30614;
+    --brand-hover-color: #b41818;
+    --primary-color: #1E3A4B;
+    --primary-hover-color: #136371;
+    --content-color: #fff;
+    --bg: #fff;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+}
+
+p,
+a,
+span,
+input,
+button,
+ul,
+li,
+div {
+    font-family: var(--content-font);
+    font-weight: 300;
+}
+
+img {
+    max-width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: var(--wrapper-size);
+}
+
+
+/* Heading Section */
+header {
+    background-color: var(--bg);
+    padding: 0 1rem;
+    box-shadow: var(--soft-shadow);
+}
+
+.navbar {
+    display: flex;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .nav-logo {
+    display: block;
+    width: 6.5rem;
+}
+
+.navbar .nav-menu {
+    display: flex;
+    list-style: none;
+    position: relative;
+    padding-left: 100px;
+}
+.navbar .nav-menu::before {
+    content: 'Select Size: ';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 400;
+    color: var(--primary-color);
+}
+
+.navbar .nav-menu>li {
+    display: block;
+    position: relative;
+}
+
+.navbar .nav-menu>li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 300ms ease-out;
+}
+
+.navbar .nav-menu>li:hover:before {
+    transform-origin: bottom;
+    transform: scaleY(1);
+}
+
+.navbar .nav-menu>li>a {
+    display: block;
+    position: relative;
+    padding: .6rem 1.3rem;
+    border: 1px solid var(--primary-color);
+    line-height: 1;
+    border-right: none;
+    text-decoration: none;
+    font-weight: 400;
+    color: var(--primary-color);
+    transition: color 300ms ease-out;
+
+}
+
+.navbar .nav-menu>li:last-child>a {
+    border: 1px solid var(--primary-color);
+}
+
+.navbar .nav-menu>li:hover>a {
+    color: var(--content-color);
+}
+
+
+/* House Display Section */
+.house-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.house-side-control>h3 {
+    color: var(--brand-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+:where(.house-side-control, .house-control-nav)>ul {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+:where(.house-side-control, .house-control-nav)>ul>li {
+    display: block;
+    font-weight: 400;
+    padding: .6rem 1rem .5rem;
+    line-height: 1;
+    color: var(--content-color);
+    background-color: var(--brand-color);
+    border: 1px solid var(--brand-color);
+    cursor: pointer;
+    transition: all 300ms ease-out;
+}
+
+:where(.house-side-control, .house-control-nav)>ul>li:hover {
+    background-color: var(--brand-hover-color);
+}
+
+/* 3d House Model Design */
+.house-model-container {
+    display: flex;
+    justify-content: center;
+    perspective: 1500px;
+    position: relative;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.house-model-block {
+    --view-deg: 0deg;
+    position: relative;
+    flex: 0 0 100%;
+    transform-style: preserve-3d;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--height) + 200px);
+    transform: translateZ(calc(var(--x-width) / -2)) rotateY(var(--view-deg));
+    transition: transform 500ms ease-in-out;
+}
+
+
+/* House Side */
+.house-model-side {
+    position: absolute;
+}
+
+.house-model-side.shadow {
+    width: var(--z-width);
+    height: 100%;
+    background-color: black;
+}
+
+.house-model-side[data-model=font-side] {
+    transform: translateZ(calc(var(--z-width) / 2));
+}
+
+.house-model-side[data-model=right-side] {
+    transform: translateX(calc(var(--x-width) / 2)) rotateY(90deg);
+}
+
+.house-model-side[data-model=back-side] {
+    transform: translateZ(calc(var(--z-width) / -2)) rotateY(180deg);
+
+}
+
+.house-model-side[data-model=left-side] {
+    transform: translateX(calc(var(--x-width) / -2)) rotateY(-90deg);
+}
+
+
+/* House Side Title */
+.house-model-side .model-title {
+    position: absolute;
+    opacity: 0;
+    font-size: 1.2rem;
+    transform: translateY(0);
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    transition-property: opacity, transform;
+    transition-duration: 500ms;
+}
+
+.house-model-side.active .model-title {
+    opacity: 1;
+    transform: translateY(calc(-100%));
+    transition-delay: 500ms;
+}
+
+/* House Model Place */
+.house-model-side .model-block {
+    position: relative;
+    height: var(--height);
+}
+
+.model-block>.house-model-place {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.house-model-place>.model-part-block {
+    flex-shrink: 0;
+    height: 100%;
+}
+
+.model-block>.house-model-place .model-part {
+    display: block;
+    height: 100%;
+}
+
+.model-block>.house-model-bg {
+    display: block;
+    z-index: 1;
+    opacity: 0.5;
+    height: 100%;
+}
+
+/* House Model Price */
+.model-price-block {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    padding: 10px 0;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateY(0%);
+    transition-property: opacity, transform;
+    transition-duration: 500ms;
+}
+
+.house-model-side.active .model-price-block {
+    opacity: 1;
+    transform: translateY(100%);
+    transition-delay: 500ms;
+}
+
+/* 3D House Navigation */
+.house-nav {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.house-nav>* {
+    font-weight: 400;
+    color: var(--brand-color);
+    border: 1px solid var(--brand-color);
+    padding: 8px 10px 6px;
+    background-color: var(--bg);
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.house-nav>*.disable {
+    opacity: .5;
+    position: relative;
+    pointer-events: none;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+/* House Element Section */
+.house-element-section {
+    padding-bottom: 40px;
+}
+
+.house-element-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.house-element-block>* {
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.house-element-block img {
+    display: block;
+    height: 140px;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1400px) {
+    body {
+        --wrapper-size: 1140px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    body {
+        --wrapper-size: 960px;
+    }
+    .model-price-block {
+        min-width: var(--wrapper-size);
+    }
+    .model-price-block {
+        left: 50%;
+        transform: translateY(0%) translateX(-50%);
+    }
+    
+    .house-model-side.active .model-price-block {
+        transform: translateY(100%) translateX(-50%);
+    }
+}
+@media screen and (max-width: 992px) {
+    body {
+        --wrapper-size: 720px;
+    }
+}
