@@ -28,8 +28,6 @@ img {
 .wrapper {
     width: 100%;
     max-width: var(--wrapper);
-    padding-left: .8rem;
-    padding-right: .8rem;
 }
 
 /* Header Section */
@@ -37,13 +35,14 @@ header {
     position: relative;
     background-color: var(--s-bg-color);
     box-shadow: var(--shadow);
+    z-index: 100;
 }
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 50px;
-    padding: 8px 0;
+    padding: .5rem .8rem;
 }
 .navbar .nav-logo {
     flex-basis: 60px;
