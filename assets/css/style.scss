@@ -10,12 +10,12 @@ body {
     --content-font: 'Josefin Sans', sans-serif;
     --brand-color: #e30613;
     --brand-h-color: #b41817;
-    --primary-color: #1E3A4B;
-    --primary-h-color: #136371;
+    --primary-color: #136371;
+    --primary-h-color: #1E3A4B;
     --content-color: #111111;
     --content-d-color: #ffffff;
-    --s-bg-color: #ffffff;
     --p-text-color: #111111;
+    --s-bg-color: #ffffff;
     --border-color: #fff4f4;
     --shadow: 0 5px 8px rgba(0,0,0,0.05);
 }
@@ -110,6 +110,7 @@ header {
 }
 .navbar .nav-menu::before {
     content: 'Select Size:';
+    color: var(--primary-color);
     position: absolute;
     left: 50%;
     top: 10px;
@@ -147,7 +148,7 @@ header {
         list-style: none;
         .btn {
             display: block;
-            padding: .5rem 1rem .4rem;
+            padding: .4rem .8rem .3rem;
             border: 1px solid var(--brand-color);
             color: var(--content-d-color);
             background-color: var(--brand-color);
