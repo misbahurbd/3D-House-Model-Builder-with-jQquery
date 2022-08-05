@@ -14,13 +14,13 @@
                 <a href="./" class="nav-logo">
                     <img src="./assets/img/Build-system-logo.png" alt="House Model Comapny Logo" class="brand-logo">
                 </a>
-                <div class="toggle active">
+                <div class="toggle">
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
-                <ul class="nav-menu show">
+                <ul class="nav-menu">
                     <li><a href="./60m-house.html">60M</a></li>
                     <li><a href="./70m-house.html">70M</a></li>
                     <li><a href="./80m-house.html">80M</a></li>
@@ -30,14 +30,14 @@
             </nav>
         </div>
     </header>
-    <main hidden>
+    <main>
         <!-- House Design Container -->
         <section class="house-container">
             <div class="wrapper">
                 <!-- House Side Control -->
                 <div class="house-side-control">
-                    <h3>Select side of the cottage</h3>
-                    <ul>
+                    <h3 class="title">Select side of the cottage</h3>
+                    <ul class="list">
                         <li class="btn" data-side="font-side">Font</li>
                         <li class="btn" data-side="right-side">Right</li>
                         <li class="btn" data-side="back-side">Back</li>
@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- House 3D Model -->
-                <div class="house-model-container">
+                <div class="house-model-container" hidden>
                     <div class="house-model-block">
                         <!-- House Model Sides -->
                         <div class="house-model-side active" data-model="font-side">
@@ -121,7 +121,7 @@
 
                 <!-- 3D House CTA Nav -->
                 <div class="house-control-nav">
-                    <ul>
+                    <ul class="list">
                         <li class="btn" data-control="reset-all">Reset All</li>
                         <li class="btn" data-control="reset-side">Reset Side</li>
                         <li class="btn" data-control="save-pdf">Save as PDF</li>
@@ -130,7 +130,7 @@
 
             </div>
         </section>
-        <section class="house-element-section">
+        <section class="house-element-section" hidden>
             <div class="wrapper">
                 <div class="house-element-block">
                     <div class="model-part-block" data-title="Model set part 1">
@@ -186,10 +186,9 @@
                 </div>
             </div>
         </section>
-
-        <script src="./assets/js/jquery-3.6.0.min.js"></script>
-        <script src="./assets/js/script.js"></script>
     </main>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
