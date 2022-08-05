@@ -22,11 +22,12 @@ $( document ).ready(function() {
         $('.house-model-container').css('--x-width', Math.floor(Math.min(...baseWidth)) + 'px');
         $('.house-model-container').css('--z-width', Math.ceil(Math.max(...baseWidth)) + 'px');
     }
-    
+    $('.house-model-block').css('opacity', '0');
     setInterval(() => { 
         updateBaseHeight();
         updateBaseWidth();
-    }, 1000);
+        $('.house-model-block').css('opacity', '1')
+    }, 500);
 
 
     const updateNav = function () {
