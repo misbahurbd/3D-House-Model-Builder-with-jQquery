@@ -10,6 +10,7 @@ $(document).ready(function () {
         e.preventDefault();
         if(!$(e.target).hasClass('btn')) return;
         var targetSide = $(e.target).attr('data-side');
+        $('.house-model-container').addClass('active')
         // Nav btn control
         $('.house-side-control').addClass('active');
         $('.house-side-control > .list').children().removeClass('active');
@@ -25,6 +26,7 @@ $(document).ready(function () {
         // Controler function
         updateNav();
         modelHeightUpdate();
+        updateAngle()
     })
     $('.house-nav').click(function (e) {
         e.preventDefault();
@@ -53,10 +55,33 @@ $(document).ready(function () {
     }
     
     function modelHeightUpdate() {
-        $('.model-block').each(function () {
-            $('.house-model-side').toggleClass('active');
-            console.log($(this).height())
-            $('.house-model-side').toggleClass('active');
+        var modelHeight = [];
+        $('.model-block').each(function() {
+            modelHeight.push($(this).height())
         })
+        var height = Math.floor(Math.min(...modelHeight))
+        $('.model-block').css('height', height);
+        $('.house-model-block').css('height', height + 80)
+        $('.house-model-block').addClass('model3d');
+        update3D();
+    }
+
+    function updateAngle() {
+        $('.house-model-side').each(function (i, side) {
+            if($(side).hasClass('active')) {
+                $('.model3d').css('--deg', '-' + i * 90 + 'deg')
+            }
+        })
+    }
+
+    function update3D() {
+        var modelWidth = [];
+        $('.model-block').each(function() {
+            modelWidth.push($(this).width())
+        })
+        var minWidth = Math.min(...modelWidth);
+        var maxWidth = Math.max(...modelWidth);
+        $('.house-model-side').css('--min', minWidth + 'px');
+        $('.house-model-side').css('--max', maxWidth + 'px');
     }
 });

@@ -189,8 +189,125 @@ header {
     }
 }
 
+.house-model-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    visibility: hidden;
+    max-height: 0vh;
+    overflow: hidden;
+    position: relative;
+    perspective: 2500px;
+    transition: all 500ms ease-out;
+    &.active {
+        visibility: visible;
+        max-height: 100vh;
+    }
+    .house-nav {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        justify-content: space-between;
+        pointer-events: none;
+        user-select: none;
+        padding: 0 2rem;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        .nav-btn {
+            pointer-events: all;
+            user-select: none;
+            cursor: pointer;
+            &.disable {
+                pointer-events: none;
+                user-select: none;
+            }
+        }
+    }
 
-
+    .house-model-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform-style: preserve-3d;
+        .house-model-side {
+            flex-shrink: 0;
+            position: relative;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            .model-title, .model-price-block {
+                position: absolute;
+                width: max-content;
+                left: 50%;
+                opacity: 0;
+                transform: translateX(-50%);
+                text-align: center;
+                transition: {
+                    property: top, bottom, opacity;
+                    duration: 300ms;
+                    timing-function: ease-out;
+                };
+            }
+            .model-title {
+                top: 40px;
+            }
+            .model-price-block {
+                bottom: 40px;
+            }
+            &.active {
+                .model-title, .model-price-block {
+                    opacity: 1;
+                    transition-delay: 500ms;
+                }
+                .model-title {
+                    top: 0;
+                }
+                .model-price-block {
+                    bottom: 0;
+                }
+            }
+            .model-block {
+                position: relative;
+                .house-model-place {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: flex-start;
+                    position: absolute;
+                    width: calc(100% + 2px);
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    border: 1px solid red;
+                }
+                .house-model-bg {
+                    display: block;
+                    height: 100%;
+                    opacity: 0.5;
+                }
+            }
+        }
+        &.model3d {
+            --deg: -0deg;
+            transition: transform 500ms ease-out;
+            transform: scale(.7) rotateY(var(--deg));
+            .house-model-side {
+                position: absolute !important;
+                &[data-model=left-side] {
+                    transform: translateX(calc(var(--min) / -2)) rotateY(-90deg);
+                }
+                &[data-model=right-side] {
+                    transform: translateX(calc(var(--min) / 2)) rotateY(90deg);
+                }
+                &[data-model=font-side] {
+                    transform: translateZ(calc(var(--max) / 2));
+                }
+                &[data-model=back-side] {
+                    transform: translateZ(calc(var(--max) / -2)) rotateY(180deg);
+                }
+            }
+        }
+    }
+}
 
 
 
