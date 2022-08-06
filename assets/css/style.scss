@@ -18,12 +18,25 @@ body {
     --s-bg-color: #ffffff;
     --border-color: #fff4f4;
     --shadow: 0 5px 8px rgba(0,0,0,0.05);
+    --shadow-top: 0 -5px 8px rgba(0,0,0,0.05);
 }
 h1, h2, h3 {
     font-family: var(--heading-font);
 }
 p, a, span, div, input, button {
     font-family: var(--content-font);
+}
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: {
+        property: color;
+        duration: 300ms;
+        timing-function: ease-out
+    };
+    &:hover {
+        color: var(--primary-h-color);
+    }
 }
 img {
     max-width: 100%;
@@ -133,7 +146,14 @@ header {
 /* House Side Nav */
 .house-side-control {
     padding: .5rem .8rem;
-
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: min-height 300ms ease-out;
+    &.active {
+        min-height: 0;
+    }
     .title {
         color: var(--primary-color);
         margin-bottom: .5rem;
@@ -152,6 +172,7 @@ header {
             border: 1px solid var(--brand-color);
             color: var(--content-d-color);
             background-color: var(--brand-color);
+            cursor: pointer;
             transition: {
                 property: color, background, border;
                 duration: 300ms;
@@ -167,3 +188,150 @@ header {
         }
     }
 }
+
+// 3D House Model
+.house-model-container {
+    position: relative;
+    max-height: 0;
+    text-align: center;
+    overflow: hidden;
+    transition: all 300ms ease-out;
+    &.active {
+        max-height: 100vh;
+    }
+    .house-model-block {
+        padding: .5rem 1.5rem;
+        position: relative;
+        display: inline-flex;
+        & > .house-nav {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            pointer-events: none;
+            .nav-btn {
+                border: 1px solid var(--brand-color);
+                padding: .3rem .4rem;
+                font-size: .8rem;
+                color: var(--primary-color);
+                background: var(--s-bg-color);
+                cursor: pointer;
+                pointer-events: all;
+                &.disable {
+                    opacity: .5;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+    .house-model-side {
+        display: none;
+        max-height: 100%;
+        text-align: center;
+        &.active {
+            display: block;
+        }
+        .model-title {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: .5rem;
+            color: var(--primary-color);
+        }
+        .model-block {
+            display: inline-flex;
+            position: relative;
+            flex-direction: column;
+            & > .house-model-place {
+                flex-grow: 0;
+                flex-wrap: nowrap;
+                flex-shrink: 0;
+                display: flex;
+                position: absolute;
+                width: calc(100% + 2px);
+                height: 100%;
+                z-index: 2;
+                justify-content: flex-start;
+                & > .model-part-block {
+                    height: 100%;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    position: relative;
+                    cursor: pointer;
+                    transition: transform 300ms ease-out;
+                    user-select: none;
+                    & > img {
+                        display: block;
+                        height: 100%;
+                    }
+                    &:hover {
+                        transform: scale(.96);
+                    }
+                    &:hover::before {
+                        content: '';
+                        left: 0;
+                        top: 0;
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        background: rgba(255, 255, 255, 0.1)
+                    }
+                    &:hover::after {
+                        content: "\f00d";
+                        font-family: 'Line Awesome Free';
+                        font-weight: 900;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        height: 20px;
+                        width: 20px;
+                        border-radius: 50%;
+                        color: var(--content-d-color);
+                        background-color: var(--brand-color);
+                        line-height: 20px;
+                    }
+                    
+                }
+            }
+            & > .house-model-bg {
+                flex-grow: 0;
+                flex-shrink: 0;
+                position: relative;
+                display: block;
+                height: 100%;
+                z-index: 1;
+            }
+        }
+        .model-price-block {
+            margin-top: .5rem;
+            font-size: .9rem;
+            text-align: center;
+        }
+    }
+}
+
+
+
+
+
+footer {
+    .copyright-block {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        padding: .6rem .8rem;
+        background: var(--s-bg-color);
+        box-shadow: var(--shadow-top);
+    }
+    .copyright {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+
