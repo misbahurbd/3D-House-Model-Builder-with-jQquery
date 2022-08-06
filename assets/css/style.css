@@ -7,11 +7,12 @@
 }
 
 body {
-  --wrapper: 100%;
+  --wrapper: 1320px;
   --heading-font: 'Alata', sans-serif;
   --content-font: 'Josefin Sans', sans-serif;
   --brand-color: #e30613;
   --brand-h-color: #b41817;
+  --brand-s-color: rgba(227, 6, 21, 0.2);
   --primary-color: #136371;
   --primary-h-color: #1E3A4B;
   --content-color: #111111;
@@ -53,6 +54,8 @@ img {
 .wrapper {
   width: 100%;
   max-width: var(--wrapper);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Header Section */
@@ -247,7 +250,7 @@ header {
   padding-left: 2rem;
   padding-right: 2rem;
   visibility: hidden;
-  max-height: 0vh;
+  max-height: 0px;
   overflow: hidden;
   position: relative;
   -webkit-perspective: 2500px;
@@ -258,7 +261,9 @@ header {
 
 .house-model-container.active {
   visibility: visible;
-  max-height: 100vh;
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
 }
 
 .house-model-container .house-nav {
@@ -283,18 +288,40 @@ header {
   left: 0;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  z-index: 10;
 }
 
 .house-model-container .house-nav .nav-btn {
+  border: 1px solid var(--brand-color);
+  color: var(--brand-color);
+  background: var(--content-d-color);
   pointer-events: all;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   cursor: pointer;
+  padding: .3rem .4rem;
+  -webkit-transition: -webkit-box-shadow 300ms ease;
+  transition: -webkit-box-shadow 300ms ease;
+  transition: box-shadow 300ms ease;
+  transition: box-shadow 300ms ease, -webkit-box-shadow 300ms ease;
+}
+
+.house-model-container .house-nav .nav-btn:hover {
+  -webkit-box-shadow: 0 5px 15px var(--brand-s-color);
+          box-shadow: 0 5px 15px var(--brand-s-color);
+}
+
+.house-model-container .house-nav .nav-btn:active {
+  -webkit-transition-duration: 100ms;
+          transition-duration: 100ms;
+  -webkit-box-shadow: 0 2px 4px var(--brand-s-color);
+          box-shadow: 0 2px 4px var(--brand-s-color);
 }
 
 .house-model-container .house-nav .nav-btn.disable {
+  opacity: .5;
   pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;

@@ -5,11 +5,12 @@
     box-sizing: border-box;
 }
 body {
-    --wrapper: 100%;
+    --wrapper: 1320px;
     --heading-font: 'Alata', sans-serif;
     --content-font: 'Josefin Sans', sans-serif;
     --brand-color: #e30613;
     --brand-h-color: #b41817;
+    --brand-s-color: rgba(227, 6, 21, 0.2);
     --primary-color: #136371;
     --primary-h-color: #1E3A4B;
     --content-color: #111111;
@@ -44,6 +45,8 @@ img {
 .wrapper {
     width: 100%;
     max-width: var(--wrapper);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Header Section */
@@ -193,14 +196,14 @@ header {
     padding-left: 2rem;
     padding-right: 2rem;
     visibility: hidden;
-    max-height: 0vh;
+    max-height: 0px;
     overflow: hidden;
     position: relative;
     perspective: 2500px;
     transition: all 500ms ease-out;
     &.active {
         visibility: visible;
-        max-height: 100vh;
+        max-height: max-content;
     }
     .house-nav {
         display: flex;
@@ -214,11 +217,25 @@ header {
         top: 50%;
         left: 0;
         transform: translateY(-50%);
+        z-index: 10;
         .nav-btn {
+            border: 1px solid var(--brand-color);
+            color: var(--brand-color);
+            background: var(--content-d-color);
             pointer-events: all;
             user-select: none;
             cursor: pointer;
+            padding: .3rem .4rem;
+            transition: box-shadow 300ms ease;
+            &:hover {
+                box-shadow: 0 5px 15px var(--brand-s-color);
+            }
+            &:active {
+                transition-duration: 100ms;
+                box-shadow: 0 2px 4px var(--brand-s-color);
+            }
             &.disable {
+                opacity: .5;
                 pointer-events: none;
                 user-select: none;
             }

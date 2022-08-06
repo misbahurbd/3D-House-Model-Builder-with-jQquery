@@ -85,3 +85,4 @@ $(document).ready(function () {
         $('.house-model-side').css('--max', maxWidth + 'px');
     }
 });
+
