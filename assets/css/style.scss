@@ -5,7 +5,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-$bounce-effect: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+$bounce-effect: cubic-bezier(0.18, 0.89, 0.32, 1.18);
 $sm-device: 576px;
 $md-device: 768px;
 $lg-device: 992;
@@ -284,14 +284,48 @@ main {
     overflow: hidden;
     transition: {
         property: max-height;
-        duration: 2500ms;
+        duration: 1000ms;
         timing-function: $bounce-effect;
     };
+    .wrapper {
+        position: relative;
+    }
+    .house-side-nav {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%);
+        pointer-events: none;
+        user-select: none;
+        .btn {
+            display: block;
+            padding: .4rem .5rem .35rem;
+            background-color: var(--brand-color);
+            color: var(--content-d-color);
+            border: 1px solid var(--brand-color);
+            pointer-events: all;
+            cursor: pointer;
+            user-select: none;
+            transition: {
+                property: background, transform, box-shadow;
+                duration: 300ms;
+                timing-function: ease-out
+            };
+            &:hover {
+                // background-color: var(--brand-h-color);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+    }
 }
 
 .house-model-outer {
     perspective: 2000px;
-    transition: transform 500ms $bounce-effect 200ms;
+    transition: transform 800ms $bounce-effect 200ms;
     .house-model-block {
         display: flex;
         width: 100%;
@@ -393,8 +427,7 @@ main {
                 }
             }
         }
-    }
-    
+    }    
 }
 
 

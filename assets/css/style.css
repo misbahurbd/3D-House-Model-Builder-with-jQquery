@@ -52,7 +52,7 @@ a::after {
   transform: scaleX(0);
   transition-property: background, transform;
   transition-duration: 300ms;
-  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.18);
 }
 a:hover {
   color: var(--primary-h-color);
@@ -113,7 +113,7 @@ header .navbar .toggle span {
   pointer-events: none;
   transition-property: opacity, transform, width;
   transition-duration: 300ms, 300ms, 200ms;
-  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.28), cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.18), cubic-bezier(0.18, 0.89, 0.32, 1.18);
 }
 header .navbar .toggle span:first-child {
   transform-origin: top left;
@@ -176,7 +176,7 @@ header .navbar .nav-menu .nav-item:hover {
     box-shadow: var(--shadow);
     transition-property: max-height;
     transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.18);
   }
   header .navbar .nav-menu .nav-item {
     padding: 0.6rem 1rem;
@@ -264,13 +264,49 @@ main > * {
   max-height: 0px;
   overflow: hidden;
   transition-property: max-height;
-  transition-duration: 2500ms;
-  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.18);
+}
+.house-model-section .wrapper {
+  position: relative;
+}
+.house-model-section .house-side-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.house-model-section .house-side-nav .btn {
+  display: block;
+  padding: 0.4rem 0.5rem 0.35rem;
+  background-color: var(--brand-color);
+  color: var(--content-d-color);
+  border: 1px solid var(--brand-color);
+  pointer-events: all;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition-property: background, transform, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+.house-model-section .house-side-nav .btn:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .house-model-outer {
   perspective: 2000px;
-  transition: transform 500ms cubic-bezier(0.18, 0.89, 0.32, 1.28) 200ms;
+  transition: transform 800ms cubic-bezier(0.18, 0.89, 0.32, 1.18) 200ms;
 }
 .house-model-outer .house-model-block {
   display: flex;
@@ -313,7 +349,7 @@ main > * {
   opacity: 1;
   transform: translateX(-50%) translateY(0%);
   transition-property: opacity, transform;
-  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.18);
   transition-duration: 300ms;
   transition-delay: 600ms;
 }
@@ -348,7 +384,7 @@ main > * {
   transform-style: preserve-3d;
   transform: rotateY(var(--deg));
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.18);
   transition-duration: 500ms;
 }
 .house-model-outer.model-3d .house-model-block .house-model-side[data-name=font] {
