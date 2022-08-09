@@ -269,7 +269,8 @@ main > * {
 }
 
 .house-model-outer {
-  perspective: 1500px;
+  perspective: 2000px;
+  transition: transform 500ms cubic-bezier(0.18, 0.89, 0.32, 1.28) 200ms;
 }
 .house-model-outer .house-model-block {
   display: flex;
@@ -278,7 +279,7 @@ main > * {
   padding-right: 3rem;
   flex-direction: column;
   align-items: center;
-  transform-style: preserve-3d;
+  justify-content: center;
 }
 .house-model-outer .house-model-block > * {
   flex-grow: 0;
@@ -292,16 +293,29 @@ main > * {
 .house-model-outer .house-model-block .house-model-side .model-title, .house-model-outer .house-model-block .house-model-side .model-price {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   white-space: nowrap;
+  opacity: 0;
 }
 .house-model-outer .house-model-block .house-model-side .model-title {
   top: 0;
   color: var(--primary-color);
+  transform: translateX(-50%) translateY(120%);
 }
 .house-model-outer .house-model-block .house-model-side .model-price {
   bottom: 0;
   color: var(--content-color);
+  transform: translateX(-50%) translateY(-150%);
+}
+.house-model-outer .house-model-block .house-model-side.active .model-title, .house-model-outer .house-model-block .house-model-side.active .model-price {
+  position: absolute;
+  left: 50%;
+  white-space: nowrap;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0%);
+  transition-property: opacity, transform;
+  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-duration: 300ms;
+  transition-delay: 600ms;
 }
 .house-model-outer .house-model-block .house-model-side .model-side {
   position: relative;
@@ -321,6 +335,33 @@ main > * {
 .house-model-outer .house-model-block .house-model-side .model-side .model-bg {
   display: block;
   height: 100%;
+  opacity: 0.5;
+}
+.house-model-outer .house-model-block.active .house-model-side {
+  position: absolute !important;
+}
+.house-model-outer.model-3d {
+  transform: perspective(2000px) translateZ(calc(var(--minWidth) / -2));
+}
+.house-model-outer.model-3d .house-model-block {
+  --deg: 90deg;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--deg));
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-duration: 500ms;
+}
+.house-model-outer.model-3d .house-model-block .house-model-side[data-name=font] {
+  transform: translateZ(calc(var(--maxWidth) / 2));
+}
+.house-model-outer.model-3d .house-model-block .house-model-side[data-name=back] {
+  transform: translateZ(calc(var(--maxWidth) / -2)) rotateY(180deg);
+}
+.house-model-outer.model-3d .house-model-block .house-model-side[data-name=left] {
+  transform: translateX(calc(var(--minWidth) / -2)) rotateY(-90deg);
+}
+.house-model-outer.model-3d .house-model-block .house-model-side[data-name=right] {
+  transform: translateX(calc(var(--minWidth) / 2)) rotateY(90deg);
 }
 
 footer {

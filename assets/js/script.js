@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // All Function
-    function updateImage (modelSize) {
+    function getReadyModel(modelSize) {
         // Update Model Image
         var modelSizeImg = '';
         switch (modelSize) { 
@@ -23,9 +23,8 @@ $(document).ready(function () {
                 break;
         }
         $($('.model-bg[data-name="left-right"]').attr('src', modelSizeImg));
-        $('.model-bg').on('load',function() {
-            getModelReady();
-        })
+        // Set element height
+        $('.model-bg').on('load', getModelReady)
     }
 
     function getModelReady() {
@@ -37,8 +36,9 @@ $(document).ready(function () {
         var minHeight = Math.min(...modelHeight)
         var height = Math.trunc(minHeight / 10) * 10;
         $('.model-side').css('height', height + 'px');
-        console.log(modelHeight)
 
+        var sideHeight = $('.house-model-side').outerHeight();
+        $('.house-model-block').addClass('active').css('height', sideHeight);
         // Update Model Size
         update3DModel();
     }
@@ -50,8 +50,19 @@ $(document).ready(function () {
         })
         var modelMaxWidth = Math.max(...modelWidth);
         var modelMinWidth = Math.min(...modelWidth);
-        $('.house-model-block').css('--maxWidth', modelMaxWidth + 'px');
-        $('.house-model-block').css('--minWidth', modelMinWidth + 'px');
+        $('.house-model-outer').css('--maxWidth', modelMaxWidth + 'px');
+        $('.house-model-outer').css('--minWidth', modelMinWidth + 'px');
+    
+        $('.house-model-outer').addClass('model-3d');
+    }
+
+    function updateRotate() {
+        $('[data-control="house-side"] .nav-item').each(function(i, side) {
+            if($(this).hasClass('active')){
+                var position = '-' + (i * 90) + 'deg';
+                $('.house-model-block').css('--deg', position);
+            }
+        })
     }
 
 
@@ -63,22 +74,39 @@ $(document).ready(function () {
 
     // House Size Control
     $('[data-control="house-size"]').click(function (e) {
+        e.preventDefault();
         if(!$(e.target).hasClass('nav-item')) return;
         $('[data-control="house-size"]').animate({
             paddingTop: 0,
             paddingBottom: 0,
             height: "toggle"
         }, 500);
+
         // Reset Model Height
         $('.model-side').css('height', 'unset');
-        // getModelReady()
 
         // Model Size Update
         var modelSize = $(e.target).text().trim();
-        updateImage (modelSize)
-
-
+        getReadyModel(modelSize)
 
         $('.house-model-section').css('max-height', '1000px');
     })
+
+    // House Side Control
+    $('[data-control="house-side"]').click(function (e) { 
+        e.preventDefault();
+        if(!$(e.target).hasClass('nav-item')) return;
+        
+        $('[data-control="house-side"] .nav-item').removeClass('active')
+        $(e.target).addClass('active');
+
+        var side = $(e.target).attr('data-side');
+        $('.house-model-side').each(function() {
+            $(this).removeClass('active');
+            if($(this).attr('data-name') == side) {
+                $(this).addClass('active');
+            }
+        })
+        updateRotate();
+    });
 });
