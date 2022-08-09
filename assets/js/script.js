@@ -41,6 +41,9 @@ $(document).ready(function () {
         $('.house-model-block').addClass('active').css('height', sideHeight);
         // Update Model Size
         update3DModel();
+
+
+        $('.house-model-section').css('max-height', '1000px');
     }
 
     function update3DModel() {
@@ -89,7 +92,6 @@ $(document).ready(function () {
         var modelSize = $(e.target).text().trim();
         getReadyModel(modelSize)
 
-        $('.house-model-section').css('max-height', '1000px');
     })
 
     // House Side Control
