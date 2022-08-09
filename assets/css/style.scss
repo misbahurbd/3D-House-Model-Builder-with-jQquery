@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Josefin+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Josefin+Sans:wght@300;400&family=Montserrat&display=swap');
 *, *::before, *::after {
     padding: 0;
     margin: 0;
@@ -321,12 +320,18 @@ main {
         }
         
     }
+    .total-cost {
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: .8rem;
+    }
 }
 
 .house-model-outer {
     perspective: 2000px;
     transition: transform 800ms $bounce-effect 200ms;
     .house-model-block {
+        position: relative;
         display: flex;
         width: 100%;
         padding-left: 3rem;
@@ -347,6 +352,8 @@ main {
                 left: 50%;
                 white-space: nowrap;
                 opacity: 0;
+                z-index: 2;
+                font-weight: 300;
             }
             .model-title {
                 top: 0;
@@ -403,7 +410,7 @@ main {
     }
     &.model-3d {
         transform: perspective(2000px) translateZ(calc(var(--minWidth) / -2));
-        .house-model-block {
+        .house-model-block.active {
             --deg: 90deg;
             transform-style: preserve-3d;
             transform: rotateY(var(--deg));
@@ -428,6 +435,37 @@ main {
             }
         }
     }    
+}
+
+// model-parts
+.model-part-block {
+    height: 100%;
+    .model-part {
+        height: 100%;
+        display: block;
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.house-parts-section {
+    display: none;
+    overflow: hidden;
+    transition: {
+        property: max-height;
+        duration: 1000ms;
+        timing-function: $bounce-effect;
+    };
+    .house-parts-block {
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .3rem;
+        .model-part-block {
+            height: 150px;
+        }
+    }
 }
 
 

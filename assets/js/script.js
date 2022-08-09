@@ -64,6 +64,7 @@ $(document).ready(function () {
         $('.house-model-outer').css('--minWidth', modelMinWidth + 'px');
     
         $('.house-model-outer').addClass('model-3d');
+        $('.house-parts-section').delay(300).slideDown(500);       
     }
 
     function updateRotate() {
@@ -140,5 +141,12 @@ $(document).ready(function () {
                 activeSide.next().click();
             }
         }
+    });
+
+    // House Parts Control
+    $('.house-parts-block').click(function (e) { 
+        e.preventDefault();
+        if(!$(e.target).hasClass('model-part-block')) return;
+        
     });
 });
