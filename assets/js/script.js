@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // All Function
-    function getModelReady(modelSize) {
+    function updateImage (modelSize) {
         // Update Model Image
         var modelSizeImg = '';
         switch (modelSize) { 
@@ -22,21 +22,25 @@ $(document).ready(function () {
             default:
                 break;
         }
-        $('.model-bg[data-name="left-right"]').attr('src', modelSizeImg);
-        
-        setInterval(() => {
-            // Model Height
-            var modelHeight = []
-            $('.model-side').each(function() {
-                modelHeight.push($(this).height());
-            })
-            var minHeight = Math.min(...modelHeight)
-            var height = Math.trunc(minHeight / 10) * 10;
-            $('.model-side').css('height', height + 'px');
+        $($('.model-bg[data-name="left-right"]').attr('src', modelSizeImg));
+        $('.model-bg').on('load',function() {
+            getModelReady();
+        })
+    }
 
-            // Update Model Sie
-            update3DModel();
-        }, 50);
+    function getModelReady() {
+        // Model Height
+        var modelHeight = []
+        $('.model-bg').each(function() {
+            modelHeight.push($(this).height());
+        })
+        var minHeight = Math.min(...modelHeight)
+        var height = Math.trunc(minHeight / 10) * 10;
+        $('.model-side').css('height', height + 'px');
+        console.log(modelHeight)
+
+        // Update Model Size
+        update3DModel();
     }
 
     function update3DModel() {
@@ -60,20 +64,21 @@ $(document).ready(function () {
     // House Size Control
     $('[data-control="house-size"]').click(function (e) {
         if(!$(e.target).hasClass('nav-item')) return;
-
         $('[data-control="house-size"]').animate({
             paddingTop: 0,
             paddingBottom: 0,
             height: "toggle"
         }, 500);
-
         // Reset Model Height
         $('.model-side').css('height', 'unset');
+        // getModelReady()
 
         // Model Size Update
         var modelSize = $(e.target).text().trim();
+        updateImage (modelSize)
 
-        getModelReady(modelSize)
+
+
         $('.house-model-section').css('max-height', '1000px');
     })
 });
