@@ -379,6 +379,9 @@ main > * {
   flex-shrink: 0;
   opacity: 0;
 }
+.house-model-outer .house-model-block .house-model-side .model-side .model-set-placeholder .model-part-block::after {
+  content: url(../img/cross.png);
+}
 .house-model-outer .house-model-block .house-model-side .model-side .model-bg {
   display: block;
   position: relative;
@@ -417,7 +420,34 @@ main > * {
 }
 
 .model-part-block {
+  position: relative;
   height: 100%;
+  cursor: pointer;
+}
+.model-part-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  transition: background 300ms ease;
+}
+.model-part-block::after {
+  content: url(../img/plus.png);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 300ms cubic-bezier(0.18, 0.89, 0.32, 1.18);
+}
+.model-part-block:hover::before {
+  background: rgba(255, 255, 255, 0.2);
+}
+.model-part-block:hover::after {
+  transform: translate(-50%, -50%) scale(1);
 }
 .model-part-block .model-part {
   height: 100%;
