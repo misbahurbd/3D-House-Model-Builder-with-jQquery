@@ -367,19 +367,23 @@ main > * {
 }
 .house-model-outer .house-model-block .house-model-side .model-side .model-set-placeholder {
   position: absolute;
+  width: calc(100% + 2px);
   height: 100%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
+  z-index: 1;
 }
 .house-model-outer .house-model-block .house-model-side .model-side .model-set-placeholder > * {
   flex-grow: 0;
   flex-shrink: 0;
+  opacity: 0;
 }
 .house-model-outer .house-model-block .house-model-side .model-side .model-bg {
   display: block;
+  position: relative;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 .house-model-outer .house-model-block.active .house-model-side {
   position: absolute !important;
@@ -394,6 +398,10 @@ main > * {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.18);
   transition-duration: 500ms;
+}
+.house-model-outer.model-3d .house-model-block.active .house-model-side {
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
 }
 .house-model-outer.model-3d .house-model-block.active .house-model-side[data-name=font] {
   transform: translateZ(calc(var(--maxWidth) / 2));

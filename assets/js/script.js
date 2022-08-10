@@ -27,6 +27,7 @@ $(document).ready(function () {
         $('.model-bg').on('load', getModelReady)
     }
 
+    // Model setup function
     function getModelReady() {
         // Model Height
         var modelHeight = []
@@ -36,7 +37,6 @@ $(document).ready(function () {
         var minHeight = Math.min(...modelHeight)
         var height = Math.trunc(minHeight / 10) * 10;
         $('.model-side').css('height', height + 'px');
-
 
         var modelWidth = []
         $('.model-side').each(function() {
@@ -53,6 +53,7 @@ $(document).ready(function () {
         $('.house-model-section').css('max-height', sectionHeight);
     }
 
+    // Active 3D Function
     function update3DModel() {
         var modelWidth = []
         $('.model-side').each(function() {
@@ -67,6 +68,7 @@ $(document).ready(function () {
         $('.house-parts-section').delay(300).slideDown(500);       
     }
 
+    // 3D Rotate control
     function updateRotate() {
         $('[data-control="house-side"] .nav-item').each(function(i, side) {
             if($(this).hasClass('active')){
@@ -74,6 +76,57 @@ $(document).ready(function () {
                 $('.house-model-block').css('--deg', position);
             }
         })
+    }
+
+    // Price update function
+    function updatePrice () {
+        // Individual Side Cost 
+        var currentSideParts = $('.house-model-side.active').find('.model-part');
+        var currentSidePrice = $('.house-model-side.active').find('.model-price span')
+        var currentSideCost = 0;
+        $(currentSideParts).each(function () {
+            currentSideCost += parseFloat($(this).attr('data-price'))
+        });
+        $(currentSidePrice).text(currentSideCost.toFixed(2));
+
+        // Total Side Cost with Funcation Costing
+        var totalSideParts = $('.house-model-block').find('.model-part');
+        var totalScrewPrice = $('.total-cost .screw-price').find('span');
+        var totalConcretePrice = $('.total-cost .concrete-price').find('span');
+
+        // Base Price
+        var screwBasePrice = 0;
+        var concreteBasePrice = 0;
+        if(totalSideParts.length) {
+            screwBasePrice = 1200;
+            concreteBasePrice = 1500;
+        }
+
+        var totalCost = 0;
+        $(totalSideParts).each(function () {
+            totalCost += parseFloat($(this).attr('data-price'));
+        });
+        $(totalScrewPrice).text((totalCost + screwBasePrice).toFixed(2));
+        $(totalConcretePrice).text((totalCost + concreteBasePrice).toFixed(2));
+    }
+
+    // Reset all elements
+    function resetAll () {
+        var totalSideParts = $('.house-model-block').find('.model-set-placeholder');
+        $(totalSideParts).each(function () {
+            // element == this
+            $(this).children().remove();
+            $('.model-price span').text('0.00');
+            updatePrice();
+        });
+    }
+    function reset() {
+        $('.house-model-side.active').find('.model-set-placeholder').children().remove();
+        updatePrice();
+        
+    }
+    function savepsdf() {
+        console.log('Save as PDF')
     }
 
 
@@ -147,6 +200,40 @@ $(document).ready(function () {
     $('.house-parts-block').click(function (e) { 
         e.preventDefault();
         if(!$(e.target).hasClass('model-part-block')) return;
-        
+        var activeSide = $('.house-model-side.active')
+        var modelPlaceholder = $('.house-model-side.active .model-set-placeholder')
+        var houseParts = $(e.target).clone();
+        modelPlaceholder.append(houseParts);
+
+        var elementWidth = 0;
+        $(modelPlaceholder.children()).each(function (index, element) {
+            elementWidth += $(this).width();
+        })
+        if(elementWidth > $(activeSide).width()) {
+            modelPlaceholder.children().last().remove();
+            alert('No space for add more parts')
+        }
+        houseParts.animate({
+            opacity: 1
+        }, 100)
+        updatePrice();
+    });
+
+    $('[data-control="house-cta"]').click(function (e) { 
+        e.preventDefault();
+        if(!$(e.target).hasClass('nav-item')) return;
+        switch ($(e.target).attr('data-name')) {
+            case 'resetall':
+                resetAll();
+                break;
+            case 'reset':
+                reset();
+                break;
+            case 'savepdf':
+                savepsdf();
+                break;
+            default:
+                break;
+        }
     });
 });
