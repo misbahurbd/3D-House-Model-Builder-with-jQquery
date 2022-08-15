@@ -65,6 +65,7 @@ $(document).ready(function () {
         $('.house-model-outer').css('--minWidth', modelMinWidth + 'px');
     
         $('.house-model-outer').addClass('model-3d');
+        $('.mode-control').animate({left: 0}, 300).find('.button').addClass('active');
         $('.house-parts-section').delay(300).slideDown(500);       
     }
 
@@ -153,7 +154,7 @@ $(document).ready(function () {
         var modelSize = $(e.target).text().trim();
         getReadyModel(modelSize)
         
-        $('[data-side="font"]').click();
+        $('[data-side="front"]').click();
 
     })
 
@@ -203,6 +204,11 @@ $(document).ready(function () {
         var activeSide = $('.house-model-side.active')
         var modelPlaceholder = $('.house-model-side.active .model-set-placeholder')
         var houseParts = $(e.target).clone();
+        $(houseParts).click(function (e) { 
+            e.preventDefault();
+            e.target.remove();
+            updatePrice();
+        });
         modelPlaceholder.append(houseParts);
 
         var elementWidth = 0;
@@ -219,6 +225,7 @@ $(document).ready(function () {
         updatePrice();
     });
 
+    // House CTA Button
     $('[data-control="house-cta"]').click(function (e) { 
         e.preventDefault();
         if(!$(e.target).hasClass('nav-item')) return;
@@ -235,5 +242,13 @@ $(document).ready(function () {
             default:
                 break;
         }
+    });
+
+    // Mode Control
+    $('.mode-switch').click(function (e) {
+        e.preventDefault();
+        if(!$(e.target).hasClass('mode-switch')) return;
+        $(e.target).find('.button').toggleClass('active');
+        $('.house-model-outer').toggleClass('model-3d');
     });
 });

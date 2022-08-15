@@ -23,6 +23,7 @@ body {
     --primary-h-color: #1E3A4B;
     --content-color: #111111;
     --content-d-color: #ffffff;
+    --bg-color: #111111;
     --s-bg-color: #ffffff;
     --border-color: #fff4f4;
     --shadow: 0 5px 8px rgba(0,0,0,0.05);
@@ -289,6 +290,50 @@ main {
     .wrapper {
         position: relative;
     }
+    .mode-control {
+        position: fixed;
+        top: 80px;
+        left: -100px;
+        width: 100px;
+        padding: .5rem 1rem .7rem;
+        border-radius: 0 10px 10px 0;
+        box-shadow: var(--shadow);
+        .mode-title {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+        }
+        .mode-switch {
+            $width: 25px;
+            position: relative;
+            border-radius: 40px;
+            height: $width;
+            background-color: rgba($color: #111, $alpha: 0.1);
+            border: 1px solid var(--bg-color);
+            cursor: pointer;
+            .button {
+                position: absolute;
+                height: $width;
+                width: $width;
+                border-radius: 50%;
+                background: var(--brand-color);
+                left: 0;
+                top: 50%;
+                transform: translate(-1px, -50%) scale(1.1);
+                user-select: none;
+                pointer-events: none;
+                transition: {
+                    property: background, left;
+                    duration: 300ms;
+                    timing-function: ease, $bounce-effect
+                };
+                &.active {
+                    background: var(--primary-color);
+                    left: calc(100% - $width + 2px);
+                }
+            }
+        }
+    }
     .house-side-nav {
         display: flex;
         justify-content: space-between;
@@ -428,7 +473,7 @@ main {
             };
             .house-model-side {
                 backdrop-filter: blur(1px);
-                &[data-name=font] {
+                &[data-name=front] {
                     transform: translateZ(calc(var(--maxWidth) / 2));
                 }
                 &[data-name=back] {
@@ -442,7 +487,29 @@ main {
                 }
             }
         }
-    }    
+    }
+    &:not(.model-3d) {
+        .house-model-side {
+            transform: scale(.8);
+            opacity: 0;
+            transition: {
+                property: transform, opacity;
+                timing-function: $bounce-effect, ease;
+                duration: 500ms;
+            };
+        }
+        .house-model-side.active {
+            transform: scale(1);
+            opacity: 1;
+            z-index: 1;
+            .model-bg {
+                display: block;
+                position: relative;
+                height: 100%;
+                opacity: 1;
+            }
+        }
+    }  
 }
 
 // model-parts

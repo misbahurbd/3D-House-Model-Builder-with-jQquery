@@ -15,6 +15,7 @@ body {
   --primary-h-color: #1E3A4B;
   --content-color: #111111;
   --content-d-color: #ffffff;
+  --bg-color: #111111;
   --s-bg-color: #ffffff;
   --border-color: #fff4f4;
   --shadow: 0 5px 8px rgba(0,0,0,0.05);
@@ -270,6 +271,50 @@ main > * {
 .house-model-section .wrapper {
   position: relative;
 }
+.house-model-section .mode-control {
+  position: fixed;
+  top: 80px;
+  left: -100px;
+  width: 100px;
+  padding: 0.5rem 1rem 0.7rem;
+  border-radius: 0 10px 10px 0;
+  box-shadow: var(--shadow);
+}
+.house-model-section .mode-control .mode-title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+.house-model-section .mode-control .mode-switch {
+  position: relative;
+  border-radius: 40px;
+  height: 25px;
+  background-color: rgba(17, 17, 17, 0.1);
+  border: 1px solid var(--bg-color);
+  cursor: pointer;
+}
+.house-model-section .mode-control .mode-switch .button {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: var(--brand-color);
+  left: 0;
+  top: 50%;
+  transform: translate(-1px, -50%) scale(1.1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  transition-property: background, left;
+  transition-duration: 300ms;
+  transition-timing-function: ease, cubic-bezier(0.18, 0.89, 0.32, 1.18);
+}
+.house-model-section .mode-control .mode-switch .button.active {
+  background: var(--primary-color);
+  left: calc(100% - 25px + 2px);
+}
 .house-model-section .house-side-nav {
   display: flex;
   justify-content: space-between;
@@ -406,7 +451,7 @@ main > * {
   -webkit-backdrop-filter: blur(1px);
           backdrop-filter: blur(1px);
 }
-.house-model-outer.model-3d .house-model-block.active .house-model-side[data-name=font] {
+.house-model-outer.model-3d .house-model-block.active .house-model-side[data-name=front] {
   transform: translateZ(calc(var(--maxWidth) / 2));
 }
 .house-model-outer.model-3d .house-model-block.active .house-model-side[data-name=back] {
@@ -417,6 +462,24 @@ main > * {
 }
 .house-model-outer.model-3d .house-model-block.active .house-model-side[data-name=right] {
   transform: translateX(calc(var(--minWidth) / 2)) rotateY(90deg);
+}
+.house-model-outer:not(.model-3d) .house-model-side {
+  transform: scale(0.8);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.18), ease;
+  transition-duration: 500ms;
+}
+.house-model-outer:not(.model-3d) .house-model-side.active {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 1;
+}
+.house-model-outer:not(.model-3d) .house-model-side.active .model-bg {
+  display: block;
+  position: relative;
+  height: 100%;
+  opacity: 1;
 }
 
 .model-part-block {
